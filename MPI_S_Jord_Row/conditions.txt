@@ -1,1 +1,0 @@
-launch parameters: mpirun -np p ./a.out n m k (filename if k == 0)
