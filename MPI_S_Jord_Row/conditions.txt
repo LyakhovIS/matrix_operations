@@ -1,0 +1,2 @@
+The conditions are the same as in S_Jord_Row.
+how to launch: mpirun -np p ./a.out n m k (filename if k == 0)
