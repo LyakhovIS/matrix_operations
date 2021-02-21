@@ -11,22 +11,22 @@ int main(int argc, char *argv[]){
     double t, error = 1.0;
     char *name;
     int *mass = NULL;
-	double *a = NULL;
-	double *b = NULL;
-	double *x = NULL;
-	double *y = NULL;
-	double *answer = NULL;
+    double *a = NULL;
+    double *b = NULL;
+    double *x = NULL;
+    double *y = NULL;
+    double *answer = NULL;
 
-	MPI_Init(&argc, &argv);
-	MPI_Comm_size(MPI_COMM_WORLD, &p);
-	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &p);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
     if (my_rank == 0) printf("\n");
 
 	if ((argc != 5) && (argc != 4)) {
-		if (my_rank == 0) printf("Wrong number of arguments!\n");
-		MPI_Finalize();
-		return -1;
+        if (my_rank == 0) printf("Wrong number of arguments!\n");
+        MPI_Finalize();
+        return -1;
 	}
 
     n = atoi(argv[1]);
@@ -98,18 +98,18 @@ int main(int argc, char *argv[]){
         err1 = 1;
     }
 
-	MPI_Allreduce(&err1, &err2, 1, MPI_INT, MPI_MAX, MPI_COMM_WORLD);
-	if (err2 == 1) {
-		if (my_rank == 0) printf("\nNot enough memory!\n");
-		free(a);
+    MPI_Allreduce(&err1, &err2, 1, MPI_INT, MPI_MAX, MPI_COMM_WORLD);
+    if (err2 == 1) {
+        if (my_rank == 0) printf("\nNot enough memory!\n");
+        free(a);
         free(b);
         free(x);
         free(y);
         free(answer);
         free(mass);
-		MPI_Finalize();
-		return -4;
-	}
+        MPI_Finalize();
+        return -4;
+    }
 
     if (k == 0){
         i = fileInputMatrix(n, argv[4], a, b, x, my_rank, p);
